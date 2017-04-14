@@ -1,0 +1,101 @@
+.penalty-well{
+				border-radius: 30px;
+				background-color: rgba(0,0,0,0.3);
+				min-height: 100px;
+			}
+			
+.roundedOne {
+        width: 56px;
+        height: 56px;
+        position: relative;
+        background: #fcfff4;
+        background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+        background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+        border-radius: 50px;
+        box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+.roundedOne label {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    background: -webkit-linear-gradient(top, #222222 0%, #45484d 100%);
+    background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
+    border-radius: 50px;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+}
+.roundedOne label:after {
+    content: '';
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    top: 1.2px;
+    left: 1.2px;
+    background: #27ae60;
+    background: -webkit-linear-gradient(top, #27ae60 0%, #145b32 100%);
+    background: linear-gradient(to bottom, #27ae60 0%, #145b32 100%);
+    opacity: 0;
+    border-radius: 50px;
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.roundedOne label:hover::after {
+    opacity: 0.3;
+}
+.roundedOne input[type=checkbox] {
+    visibility: hidden;
+}
+.roundedOne input[type=checkbox]:checked + label:after {
+    opacity: 1;
+}
+
+.score{
+    font-size: 2.4em;
+    background-color: transparent;
+    text-align: center;
+    border-width: 0;
+    width: 100%;
+    margin: 0 0 .1em 0;
+}
+
+.score-but {
+    color: #444;
+    background-color: #B5B198;
+    -webkit-border-radius: 6px;
+            border-radius: 6px; 
+    -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+    font-weight: bold;
+
+}
+
+score-but:hover, button:active, button:focus {
+    background-color: #CBC7AE;
+}
+
+.time-button {
+    color: #444;
+    background-color: #B5B198;
+    -webkit-border-radius: 6px;
+            border-radius: 6px; 
+    -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+    font-weight: bold;
+    width: 90%;
+
+}
+
+time-button:hover, button:active, button:focus {
+    background-color: #CBC7AE;
+}
+
+.time-int{
+    max-width: 60px;
+}
+
+.bout-timer{
+    font-size: 4em;
+}
+
+.bout-score{
+    font-size: 4em;
+}
