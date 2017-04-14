@@ -5,124 +5,62 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="Styles/styles.css">
 		
-		<style>
-			
-			.penalty-well{
-				border-radius: 30px;
-				background-color: rgba(0,0,0,0.3);
-				min-height: 100px;
-			}
-			
-			.roundedOne {
-				  width: 56px;
-				  height: 56px;
-				  position: relative;
-				  
-				  background: #fcfff4;
-				  background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-				  background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-				  border-radius: 50px;
-				  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
-				}
-				.roundedOne label {
-				  width: 40px;
-				  height: 40px;
-				  cursor: pointer;
-				  position: absolute;
-				  left: 8px;
-				  top: 8px;
-				  background: -webkit-linear-gradient(top, #222222 0%, #45484d 100%);
-				  background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
-				  border-radius: 50px;
-				  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
-				}
-				.roundedOne label:after {
-				  content: '';
-				  width: 38px;
-				  height: 38px;
-				  position: absolute;
-				  top: 1.2px;
-				  left: 1.2px;
-				  background: #27ae60;
-				  background: -webkit-linear-gradient(top, #27ae60 0%, #145b32 100%);
-				  background: linear-gradient(to bottom, #27ae60 0%, #145b32 100%);
-				  opacity: 0;
-				  border-radius: 50px;
-				  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
-				}
-				.roundedOne label:hover::after {
-				  opacity: 0.3;
-				}
-				.roundedOne input[type=checkbox] {
-				  visibility: hidden;
-				}
-				.roundedOne input[type=checkbox]:checked + label:after {
-				  opacity: 1;
-				}
-			
-				.score{
-					font-size: 2.4em;
-					background-color: transparent;
-					text-align: center;
-					border-width: 0;
-					width: 100%;
-					margin: 0 0 .1em 0;
-				}
-				
-				.score-but {
-					color: #444;
-					background-color: #B5B198;
-					-webkit-border-radius: 6px;
-						  border-radius: 6px; 
-					-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
-					font-weight: bold;
-
-				}
-
-				score-but:hover, button:active, button:focus {
-					background-color: #CBC7AE;
-				}
-
-		</style>
+		<script src="Scripts/scripts.js"></script>
 		
-		<script>
-			function modify_qty(val) {
-				var qty = document.getElementById('qty').value;
-				var new_qty = parseInt(qty,10) + val;
-				
-				if (new_qty < 0) {
-					new_qty = 0;
-				}
-				
-				document.getElementById('qty').value = new_qty;
-				return new_qty;
-			}
-			
-			function modify_qty_aka(val) {
-				var qty = document.getElementById('qty_aka').value;
-				var new_qty = parseInt(qty,10) + val;
-				
-				if (new_qty < 0) {
-					new_qty = 0;
-				}
-				
-				document.getElementById('qty_aka').value = new_qty;
-				return new_qty;
-			}
-		</script>
-		
-		
-		<title>Web page Title</title>
+		<title>Karate Scores</title>
 	</head>
 	<body>
 		<div class="container">
 			<!-- Bout Time -->
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-xs-2">
+					<div class="well">
+						<button class="time-button" id"time-begin" onclick="start_timer">
+							Begin
+						</button>
+						<br />
+						<button class="time-button" id"time-start-senior" onclick="time_start_senior()">
+							Time: Senior
+						</button>
+						<br />
+						<button class="time-button" id"time-start-other" onclick="time_start_other()">
+							Time: Others
+						</button>
+					</div>
+				</div>
+
+				<div class="col-xs-8">
 					<div class="well text-center">
-						<h1>0:00</h1>
+						<h1 class="bout-timer">
+							<input class="time-int text-center" id="time-min" type="number" min="0" max="3" value="0">
+							:
+							<input class="time-int text-center" id="time-sec-1" type="number" min="0" max="5" value="0">
+							<input class="time-int text-center" id="time-sec-2" type="number" min="0" max="9" value="0">
+						</h1>
+					</div>
+					<div class="text-center">
+						<button class="time-button" id="reset-all" onclick="reset_all()">
+							Reset All
+						</button>
+					</div>
+				</div>
+
+				<div class="col-xs-2">
+					<div class="well">
+							<button class="time-button" id"time-resume" onclick="start_timer">
+								Resume
+							</button>
+							<br />
+							<button class="time-button" id"time-stop" onclick="stop_timer">
+								Stop
+							</button>
+							<br />
+							<button class="time-button" id"time-clear" onclick="time_clear()">
+								Clear
+							</button>
 					</div>
 				</div>
 			</div>
@@ -130,60 +68,74 @@
 			<!--Particpant Information -->
 			<div class="row">
 				<!-- Ao -->
-				<div class="col-md-6">
+				<div class="col-xs-6">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="color: white; background-color: rgba(0,0,255,1);">
-								<h1>Ao</h1>
+						<div class="panel-heading" style="color: white; background-color: rgba(0,0,255,1);" id="ao-caption">
+								<h1>Ao <input type="text" placeholder="Name" style="background-color:blue; width: 50%;" id="ao-name"></h1>
 						</div>
 						
 						<div class="panel-body" style="background-color: rgba(0,0,255,0.3);">
-							<h3><input type="text" placeholder="Contestant Name"></h3>
 							<div class="row">
-								<div class="col-md-12 text-center">
-									<div class>
-										<h1>Points</h1>
-										<input class="score" id="qty" value="0">
-										<button class="score-but" id="down" onclick="modify_qty(-1)">-1</button>
-										<button class="score-but" id="up" onclick="modify_qty(1)">+1</button>
+								<div class="col-xs-12 text-center">
+									<div class="row">
+										<div class="col-xs-4 text-right">
+											<button class="score-but" id="down" onclick="modify_qty(-1)">-1</button>
+											<br />
+											<button class="score-but" id="down" onclick="modify_qty(-2)">-2</button>
+											<br />
+											<button class="score-but" id="down" onclick="modify_qty(-2)">-3</button>
+											<br />
+										</div>
+										<div class="col-xs-4">
+											<input class="score bout-score" id="qty" value="0">
+										</div>
+										<div class="col-xs-4 text-left">
+											<button class="score-but" id="up" onclick="modify_qty(1)">+1</button>
+											<br />
+											<button class="score-but" id="up" onclick="modify_qty(2)">+2</button>
+											<br />
+											<button class="score-but" id="up" onclick="modify_qty(3)">+3</button>
+											<br />
+										</div>
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-3">
+								<div class="col-xs-3">
 									<h1>&nbsp C</h1>
 								</div>
-								<div class="col-md-3">
+								<div class="col-xs-3">
 									<h1>&nbsp K</h1>
 								</div>
-								<div class="col-md-3">
+								<div class="col-xs-3">
 									<h1>HC</h1>
 								</div>
-								<div class="col-md-3">
+								<div class="col-xs-3">
 									<h1>H</h1>
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="well penalty-well">
-									<div class="col-md-3">
+									<div class="col-xs-3">
 										<div class="roundedOne">
 											<input type="checkbox" value="None" id="ao-c1-1">
 											<label for="ao-c1-1"></label>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<div class="col-xs-3">
 										<div class="roundedOne">
 											<input type="checkbox" value="None" id="ao-c1-2">
 											<label for="ao-c1-2"></label>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<div class="col-xs-3">
 										<div class="roundedOne">
 											<input type="checkbox" value="None" id="ao-c1-3">
 											<label for="ao-c1-3"></label>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<div class="col-xs-3">
 										<div class="roundedOne">
 											<input type="checkbox" value="None" id="ao-c1-4">
 											<label for="ao-c1-4"></label>
@@ -194,25 +146,25 @@
 							
 							<div class="row">
 								<div class="well penalty-well">
-									<div class="col-md-3">
+									<div class="col-xs-3">
 											<div class="roundedOne">
 												<input type="checkbox" value="None" id="ao-c2-1">
 												<label for="ao-c2-1"></label>
 											</div>
 										</div>
-										<div class="col-md-3">
+										<div class="col-xs-3">
 											<div class="roundedOne">
 												<input type="checkbox" value="None" id="ao-c2-2">
 												<label for="ao-c2-2"></label>
 											</div>
 										</div>
-										<div class="col-md-3">
+										<div class="col-xs-3">
 											<div class="roundedOne">
 												<input type="checkbox" value="None" id="ao-c2-3">
 												<label for="ao-c2-3"></label>
 											</div>
 										</div>
-										<div class="col-md-3">
+										<div class="col-xs-3">
 											<div class="roundedOne">
 												<input type="checkbox" value="None" id="ao-c2-4">
 												<label for="ao-c2-4"></label>
@@ -227,60 +179,74 @@
 				
 				
 				<!-- Aka -->
-				<div class="col-md-6">
+				<div class="col-xs-6">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="color: white; background-color: rgba(255,0,0,1);">
-								<h1>Aka</h1>
+						<div class="panel-heading" style="color: white; background-color: rgba(255,0,0,1);"  id="aka-caption">
+								<h1>Aka <input type="text" placeholder="Name" style="background-color:red; width: 50%;" id="aka-name"></h1>
 						</div>
 						
 						<div class="panel-body" style="background-color: rgba(255,0,0,0.3);">
-							<h3><input type="text" placeholder="Contestant Name"></h3>
 							<div class="row">
-								<div class="col-md-12 text-center">
-									<div class>
-										<h1>Points</h1>
-										<input class="score" id="qty_aka" value="0">
-										<button class="score-but" id="down" onclick="modify_qty_aka(-1)">-1</button>
-										<button class="score-but" id="up" onclick="modify_qty_aka(1)">+1</button>
+								<div class="col-xs-12 text-center">
+									<div class="row">
+										<div class="col-xs-4 text-right">
+											<button class="score-but" id="down" onclick="modify_qty_aka(-1)">-1</button>
+											<br />
+											<button class="score-but" id="down" onclick="modify_qty_aka(-2)">-2</button>
+											<br />
+											<button class="score-but" id="down" onclick="modify_qty_aka(-3)">-3</button>
+											<br />
+										</div>
+										<div class="col-xs-4">
+											<input class="score bout-score" id="qty_aka" value="0">
+										</div>
+										<div class="col-xs-4 text-left">
+											<button class="score-but" id="up" onclick="modify_qty_aka(1)">+1</button>
+											<br />
+											<button class="score-but" id="up" onclick="modify_qty_aka(2)">+2</button>
+											<br />
+											<button class="score-but" id="up" onclick="modify_qty_aka(3)">+3</button>
+											<br />
+										</div>
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-md-3">
+								<div class="col-xs-3">
 									<h1>&nbsp C</h1>
 								</div>
-								<div class="col-md-3">
+								<div class="col-xs-3">
 									<h1>&nbsp K</h1>
 								</div>
-								<div class="col-md-3">
+								<div class="col-xs-3">
 									<h1>HC</h1>
 								</div>
-								<div class="col-md-3">
+								<div class="col-xs-3">
 									<h1>H</h1>
 								</div>
 							</div>
 							
 							<div class="row">
 								<div class="well penalty-well">
-									<div class="col-md-3">
+									<div class="col-xs-3">
 										<div class="roundedOne">
 											<input type="checkbox" value="None" id="aka-c1-1">
 											<label for="aka-c1-1"></label>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<div class="col-xs-3">
 										<div class="roundedOne">
 											<input type="checkbox" value="None" id="aka-c1-2">
 											<label for="aka-c1-2"></label>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<div class="col-xs-3">
 										<div class="roundedOne">
 											<input type="checkbox" value="None" id="aka-c1-3">
 											<label for="aka-c1-3"></label>
 										</div>
 									</div>
-									<div class="col-md-3">
+									<div class="col-xs-3">
 										<div class="roundedOne">
 											<input type="checkbox" value="None" id="aka-c1-4">
 											<label for="aka-c1-4"></label>
@@ -291,25 +257,25 @@
 							
 							<div class="row">
 								<div class="well penalty-well">
-									<div class="col-md-3">
+									<div class="col-xs-3">
 											<div class="roundedOne">
 												<input type="checkbox" value="None" id="aka-c2-1">
 												<label for="aka-c2-1"></label>
 											</div>
 										</div>
-										<div class="col-md-3">
+										<div class="col-xs-3">
 											<div class="roundedOne">
 												<input type="checkbox" value="None" id="aka-c2-2">
 												<label for="aka-c2-2"></label>
 											</div>
 										</div>
-										<div class="col-md-3">
+										<div class="col-xs-3">
 											<div class="roundedOne">
 												<input type="checkbox" value="None" id="aka-c2-3">
 												<label for="aka-c2-3"></label>
 											</div>
 										</div>
-										<div class="col-md-3">
+										<div class="col-xs-3">
 											<div class="roundedOne">
 												<input type="checkbox" value="None" id="aka-c2-4">
 												<label for="aka-c2-4"></label>
