@@ -42,29 +42,7 @@ function modify_qty_aka(val) {
     return new_qty;
 }
 
-function time_clear(){
-    document.getElementById('time-min').value = 0;
-    document.getElementById('time-sec-1').value = 0;
-    document.getElementById('time-sec-2').value=0;
-}
-
-function time_start_senior(){
-    document.getElementById('time-min').value = 3;
-    document.getElementById('time-sec-1').value = 0;
-    document.getElementById('time-sec-2').value=0;
-}
-
-function time_start_other(){
-    document.getElementById('time-min').value = 2;
-    document.getElementById('time-sec-1').value = 0;
-    document.getElementById('time-sec-2').value=0;
-}
-
 function reset_all(){
-    document.getElementById('time-min').value = 0;
-    document.getElementById('time-sec-1').value = 0;
-    document.getElementById('time-sec-2').value = 0;
-
     document.getElementById('qty_aka').value = 0;
     document.getElementById('qty').value = 0;
 
@@ -95,49 +73,73 @@ function reset_all(){
     document.getElementById('aka-caption').style.color = "white";
 }
 
-/*
-var time_set = 1000;
+window.onload = function () {
+  
+  var seconds = 0; 
+  var tens = 00; 
+  var appendTens = document.getElementById("tens")
+  var appendSeconds = document.getElementById("seconds")
+  var buttonStart = document.getElementById('button-start');
+  var buttonStop = document.getElementById('button-stop');
+  var buttonReset = document.getElementById('button-reset');
+  var buttonSenior = document.getElementById('time-start-senior');
+  var buttonOther = document.getElementById('time-start-other');
+  var Interval ;
 
-var timer_button = document.getElementById('time-resume');
+  buttonStart.onclick = function() {
+    
+     clearInterval(Interval);
+     Interval = setInterval(startTimer, 1000);
+  }
+  
+    buttonStop.onclick = function() {
+       clearInterval(Interval);
+  }
+  
 
- This on its own works to set the interval timer
-    var interval_timer = setInterval(function(){
-    myTimer() }, time_set);
+  buttonReset.onclick = function() {
+    clearInterval(Interval);
+    tens = "00";
+  	seconds = "0";
+    appendTens.innerHTML = tens;
+  	appendSeconds.innerHTML = seconds;
+  }
+  
+  buttonSenior.onclick = function() {
+    clearInterval(Interval);
+    tens = "00";
+  	seconds = "3";
+    appendTens.innerHTML = tens;
+  	appendSeconds.innerHTML = seconds;
+  }
 
-
-function start_timer(){
-    var interval_timer = setInterval(function(){
-    myTimer() }, time_set);
-}
-
-timer_button.onclick = function() { start_timer(); }
-
-function stop_timer(){
-    clearInterval(interval_timer);
-}
- */
-function myTimer(){
-    var min = document.getElementById('time-min').value;
-    var sec_1 = document.getElementById('time-sec-1').value;
-    var sec_2 = document.getElementById('time-sec-2').value;
-
-    if(sec_2 == 0){
-        if(sec_1 == 0){
-            if(min == 0){
-                stop_timer();
-            }
-            else{
-                document.getElementById('time-min').value = min - 1;
-                document.getElementById('time-sec-1').value = 5;
-                document.getElementById('time-sec-2').value = 9;
-            }
-        }
-        else{
-            document.getElementById('time-sec-1').value = sec_1 - 1;
-            document.getElementById('time-sec-2').value = 9;
-        }
+  buttonOther.onclick = function() {
+    clearInterval(Interval);
+    tens = "00";
+  	seconds = "2";
+    appendTens.innerHTML = tens;
+  	appendSeconds.innerHTML = seconds;
+  }
+   
+  function startTimer () {
+    tens--; 
+    
+    if(tens < 0 && seconds > 0){
+        seconds--;
+        tens = 59;
     }
-    else{
-        document.getElementById('time-sec-2').value = sec_2 - 1;
+    else if(tens == 0 && seconds == 0){
+        clearInterval(Interval);
     }
+
+    if(tens > 9){
+      appendTens.innerHTML = tens;
+    }
+    
+    if (tens < 9){
+      appendTens.innerHTML = "0" + tens;
+    } 
+
+    appendSeconds.innerHTML = seconds;
+  }
 }
